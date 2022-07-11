@@ -37,7 +37,7 @@ function App() {
   },[dataUser])
 
   return (
-    <div className={`transition ease-linear duration-500 min-h-screen flex flex-col justify-center items-center px-10 xl:px-72 ${theme.body}`}>
+    <div className={`transition ease-linear duration-500 min-h-screen flex flex-col justify-center items-center py-10 px-10 xl:px-72 ${theme.body}`}>
       <header className="flex justify-between w-full">
           <h1 className="font-menuFont text-2xl font-semibold">devfinder</h1>
           <ButtonTheme />
