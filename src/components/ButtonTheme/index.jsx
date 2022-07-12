@@ -5,7 +5,7 @@ import { getTheme, onChangeTheme } from "../../functions/change_theme";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMoon, faSun } from '@fortawesome/free-solid-svg-icons'
 
-const ButtonTheme = () => {
+export const ButtonTheme = () => {
 
     const [currentTheme, setCurrentTheme] = useState(getTheme());
 
@@ -23,5 +23,3 @@ const ButtonTheme = () => {
         </div>
     )
 }
-
-export default ButtonTheme;

@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faLocationDot, faLink, faHouseLaptop } from '@fortawesome/free-solid-svg-icons'
 import { faTwitter } from "@fortawesome/free-brands-svg-icons";
 
-const CardDev = ({cardStyles, dataUser}) => {
+export const CardDev = ({cardStyles, dataUser}) => {
 
     const {followers, following, avatar_url, name, login, location} = dataUser;
     const {html_url, bio, company, public_repos, twitter_username, created_at, blog} = dataUser;
@@ -56,5 +56,3 @@ const CardDev = ({cardStyles, dataUser}) => {
         </article>
     )
 }
-
-export default CardDev;
