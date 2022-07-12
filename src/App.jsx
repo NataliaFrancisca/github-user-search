@@ -10,7 +10,7 @@ import { MessageError } from "./components/UI/Elements";
 import { getTheme } from "./functions/change_theme";
 
 const lightTheme = { body: "bg-bg_light text-black", card: "bg-card_light text-black", cardColor: "text-black" };
-const darkTheme = { body: "bg-bg_dark text-white", card: 'bg-card_dark text-white', cardColor: "text-gray-300"}
+const darkTheme = { body: "bg-bg_dark text-white", card: 'bg-card_dark text-white', cardColor: "text-gray-300"};
 
 function App() {
 
@@ -27,12 +27,13 @@ function App() {
     onChangeCSS();
   },[])
 
-  const onGetUserInfo = () => {
+  const onGetUserInfo = (event) => {
+    event.preventDefault();
     fetch(`https://api.github.com/users/${userSearch}`)
       .then(response => {
         if(!response.ok){
           setShowError(response);
-          setDataUser(null)
+          setDataUser(null);
           throw new Error('Network response was not OK');
         }
         setShowError(false);
@@ -49,19 +50,17 @@ function App() {
           <ButtonTheme />
       </header>
 
-      <section className={`w-full mt-6 p-4 rounded-lg flex items-center justify-between ${theme.card}`}>
-        <form className="flex items-center w-11/12">
-          <FontAwesomeIcon icon={faSearch} className="font-semibold pr-2" />
-          <input 
-            onChange={(event) => setUserSearch(event.target.value)}
-            type="text" name='user' className="bg-transparent p-2 outline-none w-11/12" placeholder="Search Github username..."/>
-        </form>
-       
-        <button className="bg-blue-600 py-2 px-4 rounded-md text-gray-50" onClick={onGetUserInfo}>Search</button>
-      </section>
+      <form className={`w-full mt-6 p-4 rounded-lg flex items-center justify-between ${theme.card}`} onSubmit={event => onGetUserInfo(event)}>
+        <FontAwesomeIcon icon={faSearch} className="font-semibold pr-2" />
+        <input 
+          onChange={(event) => setUserSearch(event.target.value)}
+          type="text" name='user' className="bg-transparent p-2 outline-none w-11/12" placeholder="Search Github username..."/>
 
-    {showError ? <MessageError backgroundCard={theme.card} statusCode={showError.status} /> : null}
-    {dataUser ? <CardDev backgroundCard={theme.card} backgroundBody={theme.body} cardColor={theme.cardColor} dataUser={dataUser}/> : null}
+        <button type="submit" className="bg-blue-600 py-2 px-4 rounded-md text-gray-50">Search</button>
+      </form>
+       
+      {showError ? <MessageError backgroundCard={theme.card} statusCode={showError.status} /> : null}
+      {dataUser ? <CardDev cardStyles={theme} dataUser={dataUser}/> : null}
 
     </div>
   )
