@@ -2,6 +2,7 @@ import { FlexGroup, FlexColumnGroup } from "../UI/Elements";
 
 import { formatDate } from "../../functions/format_date";
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faLocationDot, faLink, faHouseLaptop } from '@fortawesome/free-solid-svg-icons'
 import { faTwitter } from "@fortawesome/free-brands-svg-icons";
 
@@ -9,13 +10,13 @@ const CardDev = ({backgroundCard, backgroundBody, cardColor, dataUser}) => {
 
     const { followers, following } = dataUser;
     const { avatar_url, name, login, location } = dataUser;
-    const { html_url, bio, company, public_repos, twitter_username, created_at} = dataUser;
+    const { html_url, bio, company, public_repos, twitter_username, created_at, blog} = dataUser;
 
     return(
         <article className={`w-full flex flex-col mt-6 p-8 rounded-lg items-end ${backgroundCard}`}>
 
             <section className="w-full flex justify-between">
-                <img className="rounded-full object-cover h-24 w-24" src={avatar_url} />
+                <img className="rounded-full object-cover h-28 w-28" src={avatar_url} />
 
                 <aside className="flex w-9/12 ml-4 align-top justify-between flex-col md:flex-row " > 
                     <div>
@@ -29,7 +30,7 @@ const CardDev = ({backgroundCard, backgroundBody, cardColor, dataUser}) => {
 
             <section className="w-full flex justify-end mt-6 md:mt-0">
                 <div className="flex flex-col w-full md:w-9/12" > 
-                    <p className={`text-base ${cardColor}`}>{bio ? bio : "Not Available"} </p>
+                    <p className={`text-base ${cardColor} mb-2`}>{bio ? bio : "Not Available"} </p>
 
                     <aside className={`flex p-6 rounded-lg my-2 space-x-4 md:space-x-8 ${backgroundBody} ${cardColor}`}>
                         <FlexColumnGroup title="Repos" text={public_repos} />
@@ -37,12 +38,17 @@ const CardDev = ({backgroundCard, backgroundBody, cardColor, dataUser}) => {
                         <FlexColumnGroup title="Following" text={following} />
                     </aside>
 
-                    <aside className={`grid grid-cols-1 gap-2 my-2 sm:grid-cols-2 ${cardColor}`}>
+                    <ul className={`grid grid-cols-1 gap-x-8 gap-y-4 my-2 sm:grid-cols-2 ${cardColor}`}>
                         <FlexGroup icon={faLocationDot} title={location} />
                         <FlexGroup icon={faTwitter} title={twitter_username} />
-                        <FlexGroup icon={faLink} title={'nat@mail.com'} />
+                        <li className="font-cardFont flex items-center">
+                            {blog 
+                                ? [<FontAwesomeIcon icon={faLink} fixedWidth size="lg" />, <a href={blog} className={`ml-2 font-normal text-sm break-all`}>{blog}</a>]
+                                : [<FontAwesomeIcon icon={faLink} fixedWidth size="lg" className="text-slate-400"/>, <a href={blog} className={`ml-2 font-normal text-sm text-slate-400 break-all`}>Not Available</a>]
+                            }
+                        </li>
                         <FlexGroup icon={faHouseLaptop} title={company} />
-                    </aside>
+                    </ul>
                 </div>
             </section>
 
