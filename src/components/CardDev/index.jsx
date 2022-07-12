@@ -6,14 +6,15 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faLocationDot, faLink, faHouseLaptop } from '@fortawesome/free-solid-svg-icons'
 import { faTwitter } from "@fortawesome/free-brands-svg-icons";
 
-const CardDev = ({backgroundCard, backgroundBody, cardColor, dataUser}) => {
+const CardDev = ({cardStyles, dataUser}) => {
 
-    const { followers, following } = dataUser;
-    const { avatar_url, name, login, location } = dataUser;
-    const { html_url, bio, company, public_repos, twitter_username, created_at, blog} = dataUser;
+    const {followers, following, avatar_url, name, login, location} = dataUser;
+    const {html_url, bio, company, public_repos, twitter_username, created_at, blog} = dataUser;
+
+    const {card, body, cardColor} = cardStyles;
 
     return(
-        <article className={`w-full flex flex-col mt-6 p-8 rounded-lg items-end ${backgroundCard}`}>
+        <article className={`w-full flex flex-col mt-6 p-8 rounded-lg items-end ${card}`}>
 
             <section className="w-full flex justify-between">
                 <img className="rounded-full object-cover h-28 w-28" src={avatar_url} />
@@ -32,7 +33,7 @@ const CardDev = ({backgroundCard, backgroundBody, cardColor, dataUser}) => {
                 <div className="flex flex-col w-full md:w-9/12" > 
                     <p className={`text-base ${cardColor} mb-2`}>{bio ? bio : "Not Available"} </p>
 
-                    <aside className={`flex p-6 rounded-lg my-2 space-x-4 md:space-x-8 ${backgroundBody} ${cardColor}`}>
+                    <aside className={`flex p-6 rounded-lg my-2 space-x-4 md:space-x-8 ${body} ${cardColor}`}>
                         <FlexColumnGroup title="Repos" text={public_repos} />
                         <FlexColumnGroup title="Followers" text={followers} />
                         <FlexColumnGroup title="Following" text={following} />
