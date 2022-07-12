@@ -1,16 +1,14 @@
 import { useState, useEffect } from "react"
 
-import ButtonTheme from "./components/ButtonTheme"
-import CardDev from "./components/CardDev";
+import { ButtonTheme } from "./components/ButtonTheme"
+import { CardDev } from "./components/CardDev";
+import { MessageError } from "./components/UI/Elements";
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
 
-import { MessageError } from "./components/UI/Elements";
 import { getTheme } from "./functions/change_theme";
-
-const lightTheme = { body: "bg-bg_light text-black", card: "bg-card_light text-black", cardColor: "text-black" };
-const darkTheme = { body: "bg-bg_dark text-white", card: 'bg-card_dark text-white', cardColor: "text-gray-300"};
+import { darkTheme, lightTheme } from "./utils/theme_rules";
 
 function App() {
 
@@ -44,7 +42,7 @@ function App() {
   }
 
   return (
-    <div className={`transition ease-linear duration-500 min-h-screen flex flex-col justify-center items-center py-10 px-10 xl:px-80 ${theme.body}`}>
+    <main className={`transition ease-linear duration-500 min-h-screen flex flex-col justify-center items-center py-10 px-10 xl:px-80 ${theme.body}`}>
       <header className="flex justify-between w-full">
           <h1 className="font-menuFont text-2xl font-semibold">devfinder</h1>
           <ButtonTheme />
@@ -61,8 +59,7 @@ function App() {
        
       {showError ? <MessageError backgroundCard={theme.card} statusCode={showError.status} /> : null}
       {dataUser ? <CardDev cardStyles={theme} dataUser={dataUser}/> : null}
-
-    </div>
+    </main>
   )
 }
 
